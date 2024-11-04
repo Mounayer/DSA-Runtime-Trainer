@@ -6,7 +6,7 @@ import {
   ScrollRestoration,
 } from "@remix-run/react";
 import type { LinksFunction } from "@remix-run/node";
-
+import Sidebar from "./components/sidebar";
 import "./tailwind.css";
 
 export const links: LinksFunction = () => [
@@ -31,10 +31,15 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Meta />
         <Links />
       </head>
-      <body>
-        {children}
-        <ScrollRestoration />
-        <Scripts />
+      <body className="flex flex-row">
+        <div>
+          <Sidebar />
+        </div>
+        <div className="flex-1 ml-48">
+          {children}
+          <ScrollRestoration />
+          <Scripts />
+        </div>
       </body>
     </html>
   );
