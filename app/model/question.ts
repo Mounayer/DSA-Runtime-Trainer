@@ -1,10 +1,11 @@
+import { Difficulty } from "~/helpers/enumerations";
 import CodeBlock from "./codeblock";
 
 class Question {
   static number = 1;
 
   code: CodeBlock;
-  difficulty: number;
+  difficulty: Difficulty;
   result: string;
   explanation: string;
   id: number;
@@ -14,14 +15,14 @@ class Question {
    * Creates a new question
    *
    * @param code - The CodeBlock instance
-   * @param difficulty - The difficulty level as a number
+   * @param difficulty - The difficulty level
    * @param result - The expected result as a string
    * @param explanation - The explanation as a string
    */
   constructor(
     code: CodeBlock,
     language: string,
-    difficulty: number,
+    difficulty: Difficulty,
     result: string,
     explanation: string
   ) {

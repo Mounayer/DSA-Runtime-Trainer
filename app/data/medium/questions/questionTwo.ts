@@ -2,43 +2,52 @@ import { Difficulty, Languages } from "~/helpers/enumerations";
 import CodeBlock from "~/model/codeblock";
 import Question from "~/model/question";
 
-const code = new CodeBlock("# Analyze this function")
-  .add("def countTriplets(n):")
-  .add("count = 0", "1", "1 for the assignment")
+const code = new CodeBlock("// Analyze this function")
+  .add("int countTriplets(int n)")
+  .add("{")
+  .add("int count = 0;", "1", "1 for initialization")
   .add(
-    "for i in range(n):",
-    "1 + n",
-    "1 for the range function call, n for the increment"
+    "for (int i = 0; i < n; ++i)",
+    "2n + 1",
+    "1 for initialization, n for comparison, n for increment"
   )
+  .add("{")
   .add(
-    "for j in range(i, n):",
-    "n + n^2",
-    "n for the range function call, n^2 for the increment"
+    "for (int j = i; j < n; ++j)",
+    "2n^2 + n",
+    "n for initialization, n^2 for comparison, n^2 for increment"
   )
+  .add("{")
   .add(
-    "for k in range(j, n):",
-    "n^2 + n^3",
-    "n^2 for the range function call, n^3 for the increment"
+    "for (int k = j; k < n; ++k)",
+    "2n^3 + n^2",
+    "n^2 for initialization, n^3 for comparison, n^3 for increment"
   )
+  .add("{")
   .add(
-    "if (i + j + k) % 2 == 0:",
+    "if ( (i + j + k) % 2 == 0)",
     "4n^3",
-    "2n^3 for the addition, n^3 for the modulo operator, n^3 for the comparison"
+    "3n^3 for addition, n^3 for modulo"
   )
-  .add(
-    "count += 1",
-    "n^3",
-    "n^3 for the increment, in this case,  redundant to even consider since it's conditional"
-  )
-  .add("return count", "1", "1 for the return statement");
+  .add("{")
+  .add("++count;", "n^3", "n^3 for increment")
+  .add("}")
+  .add("}")
+  .add("}")
+  .add("}")
+  .add("return count;", "1", "1 for return")
+  .add("}");
 
 const questionTwo = new Question(
   code,
-  Languages.Python,
+  Languages.CPlusPlus,
   Difficulty.Medium,
   "O(n^3)",
-  `This function has a cubic runtime complexity of O(n^3) because the function iterates through the array three times, each time for each element in the array.
-  Adding everything we have counted, we get: 1 + 1 + n + 1 + n + n^2 + n^2 + n^3 + 4n^3 + n^3 + 1 = 6n^3 + 2n^2 + 2n + 3 = O(n^3). because we drop the constants.`
+  `This function has a cubic time complexity of O(n^3). 
+  The outermost loop runs n times, the middle loop runs n^2 times, 
+  and the innermost loop runs n^3 times. 
+  If we add everything together we get: 1 + 2n + 1 + 2n^2 + n + 2n^3 + n^2 + 4n^3 + n^3 + 1 = 7n^3 + 3n^2 + 4n + 2 = O(n^3). since we drop the constants.
+  Therefore, the overall time complexity is O(n^3).`
 );
 
 export default questionTwo;

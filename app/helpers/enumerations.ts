@@ -2,9 +2,9 @@
  * Difficulty of the question
  */
 export enum Difficulty {
-  Easy = 1,
-  Medium = 2,
-  Hard = 3,
+  Easy = "Easy",
+  Medium = "Medium",
+  Hard = "Hard",
 }
 
 /**

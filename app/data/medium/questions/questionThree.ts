@@ -2,38 +2,63 @@ import { Difficulty, Languages } from "~/helpers/enumerations";
 import CodeBlock from "~/model/codeblock";
 import Question from "~/model/question";
 
-const code = new CodeBlock("# Analyze this function")
-  .add("def mysteryFunction(arr):")
-  .add("n = len(arr)", "2", "1 for the assignment, 1 for the len function call")
+const code = new CodeBlock("// Analyze this function")
+  .add("function mysteryFunction(arr: number[]): number[]")
+  .add("{")
   .add(
-    "for i in range(n):",
-    "1 + n",
-    "1 for the range function call, n for the increment"
+    "const n = arr.length;",
+    "2",
+    "1 for initialization, 1 for accessing the length of the array"
   )
   .add(
-    "for j in range(i, n - i - 1):",
-    "3n + n^2",
-    "n for the range function call, 2n for the subtraction operators, n^2 for the increment"
+    "for (let i = 0; i < n; ++i)",
+    "2n + 1",
+    "1 for initialization, n for comparison, n for increment"
   )
+  .add("{")
   .add(
-    "if arr[j] > arr[j + 1]:",
+    "for (let j = i; j < n - i - 1; ++j)",
+    "4n^2 + n",
+    "n for initialization, 2n^2 for subtraction, n^2 for comparison, n^2 for increment"
+  )
+  .add("{")
+  .add(
+    "if (arr[j] > arr[j + 1])",
     "4n^2",
-    "2n^2 for the subscript operators, n^2 for the comparison, n^2 for the + operator"
+    "2n^2 for accessing the array, n^2 for comparison, n^2 for addition"
+  )
+  .add("{")
+  .add(
+    "const temp = arr[j];",
+    "2n^2",
+    "n^2 for accessing the array, n^2 for assignment"
   )
   .add(
-    "arr[j], arr[j + 1] = arr[j + 1], arr[j]",
-    "7n^2",
-    "4n^2 for the subscript operators, n^2 for the assignment, 2n^2 for the + operator"
+    "arr[j] = arr[j + 1];",
+    "4n^2",
+    "2n^2 for accessing the array, n^2 for assignment, n^2 for addition"
   )
-  .add("return arr", "1", "1 for the return statement");
+  .add(
+    "arr[j + 1] = temp;",
+    "3n^2",
+    "n^2 for accessing the array, n^2 for assignment, n^2 for addition"
+  )
+  .add("}")
+  .add("}")
+  .add("}")
+  .add("return arr;", "1", "1 for return")
+  .add("}");
 
 const questionThree = new Question(
   code,
-  Languages.Python,
+  Languages.TypeScript,
   Difficulty.Medium,
   "O(n^2)",
-  `This function has a quadratic runtime complexity of O(n^2) because the function iterates through the array twice, each time for each element in the array.
-  Adding everything we have counted, we get: 2 + 1 + n + 1 + n + 3n + n^2 + 4n^2 + 7n^2 + 1 = 12n^2 + 4n + 4 = O(n^2). because we drop the constants.`
+  `This function has a quadratic time complexity of O(n^2). 
+  Since it loops through the array once for each element, 
+  the outer loop runs n times, and the inner loop runs n - i - 1 times. 
+  If we add everything together we get: 2 + 2n + 1 + 4n^2 + n + 4n^2 + 4n^2 + 3n^2 + 1 = 15n^2 + 3n + 3 = O(n^2). 
+  Therefore, the overall time complexity is O(n^2).`
 );
 
 export default questionThree;

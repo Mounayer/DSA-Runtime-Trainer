@@ -1,40 +1,69 @@
-# Welcome to Remix!
+The `DSA-Runtime-Trainer` is an app meant for educational use, that helps developers learn and understand `Big O runtime complexities` of various algorithms and pieces of code.
 
-- 📖 [Remix docs](https://remix.run/docs)
+## Questions
 
-## Development
+There are three tiers of difficulty for questions:
 
-Run the dev server:
+- Easy
+- Medium
+- Hard
 
-```shellscript
-npm run dev
+### Easy
+
+The easy difficulty is meant for beginners, or those just starting to learn about Big O notation and runtime complexity, the code is meant to be straightforward, easy to understand and analyze, i.e.:
+
+```javascript
+// Analyze this function
+function isNumberThere(arr, number) {
+  const size = arr.length;
+  for (let i = 0; i < size; ++i) {
+    if (arr[i] === number) {
+      return true;
+    }
+  }
+  return false;
+}
 ```
 
-## Deployment
+### Medium
 
-First, build your app for production:
+The medium difficulty is supposed to offer some challenge, and mainly provide realistic real world code examples aimed to solve a certain problem, these questions may also involve data structures, and/or wrapper functions with more complex logic than easy questions, i.e.:
 
-```sh
-npm run build
+```python
+# Analyze this function
+def countTriplets(n):
+  count = 0
+   for i in range(n):
+     for j in range(i, n):
+       for k in range(j, n):
+         if (i + j + k) % 2 == 0:
+           count += 1
+   return count
 ```
 
-Then run the app in production mode:
+### Hard
 
-```sh
-npm start
+The hard difficulty is supposed to use advanced concepts, heavy use of data structures, and maybe dynamic programming, such as memoization and tabulation. The solution might be more towards understanding how the code changes its behavior when introducing new things, such as memoization, rather than simply analyzing every line of code, i.e.:
+
+```cpp
+int fib_helper(int n, std::unordered_map<int, int>& memo)
+{
+  if (n <= 1)
+  {
+    return n;
+  }
+  if (memo.find(n) != memo.end())
+  {
+    return memo[n];
+  }
+  memo[n] = fib_helper(n - 1, memo) + fib_helper(n - 2, memo);
+  return memo[n];
+}
+
+// Analyze this function
+int fib(int n)
+{
+  std::unordered_map<int, int> memo;
+  return fib_helper(n, memo);
+}
 ```
-
-Now you'll need to pick a host to deploy it to.
-
-### DIY
-
-If you're familiar with deploying Node applications, the built-in Remix app server is production-ready.
-
-Make sure to deploy the output of `npm run build`
-
-- `build/server`
-- `build/client`
-
-## Styling
-
-This template comes with [Tailwind CSS](https://tailwindcss.com/) already configured for a simple default starting experience. You can use whatever css framework you prefer. See the [Vite docs on css](https://vitejs.dev/guide/features.html#css) for more information.
