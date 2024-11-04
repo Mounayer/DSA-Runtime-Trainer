@@ -108,7 +108,7 @@ export default function Question() {
       <h1 className="mb-4 text-xl font-bold">
         Question {question.id} - Difficulty: {question.difficulty}
       </h1>
-      <div className="p-4 rounded-lg border-2 border-black code-container">
+      <div className="p-2 rounded-lg border-2 border-black code-container">
         {highlightedCode ? (
           <SyntaxHighlighter
             language={question.language}
