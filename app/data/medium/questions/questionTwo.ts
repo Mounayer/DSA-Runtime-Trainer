@@ -2,7 +2,7 @@ import { Difficulty, Languages } from "~/helpers/enumerations";
 import CodeBlock from "~/model/codeblock";
 import Question from "~/model/question";
 
-const code = new CodeBlock("// Analyze this function")
+const code = new CodeBlock("# Analyze this function")
   .add("def countTriplets(n):")
   .add("count = 0", "1", "1 for the assignment")
   .add(
