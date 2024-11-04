@@ -23,7 +23,7 @@ export default function Index() {
       </p>
 
       <a
-        href="https://github.com/your-github-profile/your-repo"
+        href="https://github.com/Mounayer/DSA-Runtime-Trainer"
         target="_blank"
         rel="noopener noreferrer"
         className="text-blue-600 underline mb-6"

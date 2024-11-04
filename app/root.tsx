@@ -35,7 +35,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <div>
           <Sidebar />
         </div>
-        <div className="flex-1 ml-48">
+        <div className="flex-1">
           {children}
           <ScrollRestoration />
           <Scripts />

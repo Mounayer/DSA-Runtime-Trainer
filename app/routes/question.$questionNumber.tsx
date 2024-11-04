@@ -104,7 +104,7 @@ export default function Question() {
   };
 
   return (
-    <div className="mx-auto p-4">
+    <div className="mx-auto p-4 mt-12">
       <h1 className="mb-4 text-xl font-bold">
         Question {question.id} - Difficulty: {question.difficulty}
       </h1>
