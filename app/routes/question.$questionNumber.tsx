@@ -7,7 +7,7 @@ import hardQuestions from "~/data/hard";
 import formatCode from "~/helpers/formatCode";
 import type { MetaFunction } from "@remix-run/node";
 import type { default as IQuestion } from "~/model/question";
-import { Difficulty } from "~/helpers/enumerations";
+import { Difficulty, Languages } from "~/helpers/enumerations";
 
 export const meta: MetaFunction = () => {
   return [
@@ -69,7 +69,9 @@ export default function Question() {
       .map((line, index) => {
         const result =
           submit && question.code.result[index]
-            ? ` // ${question.code.result[index]}`
+            ? ` ${question.language === Languages.Python ? "#" : "//"} ${
+                question.code.result[index]
+              }`
             : "";
         const explanation =
           submit && question.code.explanation[index]
