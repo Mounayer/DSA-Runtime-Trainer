@@ -1,5 +1,10 @@
 {
-  "name": "",
+  "name": "runtime-complexity-trainer",
+  "version": "1.0.0",
+  "description": "A web app to train your brain to calculate the runtime complexity of algorithms",
+  "author": {
+    "name": "Majd Al Mnayer"
+  },
   "private": true,
   "sideEffects": false,
   "type": "module",
