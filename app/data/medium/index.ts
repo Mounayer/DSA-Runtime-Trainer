@@ -1,6 +1,7 @@
 import type Question from "~/model/question";
 import questionOne from "./questions/questionOne";
 import questionTwo from "./questions/questionTwo";
+import questionThree from "./questions/questionThree";
 
 const questionsMap = new Map<number, Question>();
 
@@ -15,6 +16,7 @@ function addQuestion(question: Question) {
 
 addQuestion(questionOne);
 addQuestion(questionTwo);
+addQuestion(questionThree);
 
 const mediumQuestions = Array.from(questionsMap.values());
 

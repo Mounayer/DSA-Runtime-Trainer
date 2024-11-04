@@ -32,7 +32,7 @@ const code = new CodeBlock("# Analyze this function")
   )
   .add("return count", "1", "1 for the return statement");
 
-const questionFour = new Question(
+const questionTwo = new Question(
   code,
   Languages.Python,
   Difficulty.Medium,
@@ -41,4 +41,4 @@ const questionFour = new Question(
   Adding everything we have counted, we get: 1 + 1 + n + 1 + n + n^2 + n^2 + n^3 + 4n^3 + n^3 + 1 = 6n^3 + 2n^2 + 2n + 3 = O(n^3). because we drop the constants.`
 );
 
-export default questionFour;
+export default questionTwo;
