@@ -7,6 +7,7 @@ import hardQuestions from "~/data/hard";
 import formatCode from "~/helpers/formatCode";
 import type { MetaFunction } from "@remix-run/node";
 import type { default as IQuestion } from "~/model/question";
+import { Difficulty } from "~/helpers/enumerations";
 
 export const meta: MetaFunction = () => {
   return [
@@ -96,8 +97,17 @@ export default function Question() {
 
   const handleNext = (event: React.FormEvent) => {
     event.preventDefault();
-    if (Number(questionNumber) >= questions.length) {
-      console.log("No more questions");
+    if (
+      Number(questionNumber) >= questions.length &&
+      question.difficulty == Difficulty.Hard
+    ) {
+      return;
+    } else if (Number(questionNumber) >= questions.length) {
+      if (question.difficulty == Difficulty.Easy) {
+        navigate(`/question/${1}?difficulty=medium`);
+      } else if (question.difficulty == Difficulty.Medium) {
+        navigate(`/question/${1}?difficulty=hard`);
+      }
       return;
     }
     navigate(`/question/${Number(questionNumber) + 1}`);
@@ -188,7 +198,10 @@ export default function Question() {
               Submit
             </button>
           )}
-          {Number(questionNumber) < questions.length && (
+          {Number(questionNumber) >= questions.length &&
+          question.difficulty === Difficulty.Hard ? (
+            <></>
+          ) : (
             <button
               onClick={handleNext}
               className="bg-blue-500 w-32 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded self-start"
