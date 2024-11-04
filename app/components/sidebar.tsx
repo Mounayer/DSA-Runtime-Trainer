@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Sidebar as FlowbiteSidebar } from "flowbite-react";
 import easyQuestions from "~/data/easy";
 import hardQuestions from "~/data/hard";
@@ -11,20 +11,43 @@ export default function Sidebar() {
     setIsCollapsed(!isCollapsed);
   };
 
+  // Check if the screen width is below 768px to set the initial collapsed state
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth < 768) {
+        setIsCollapsed(true);
+      }
+    };
+
+    // Set initial collapsed state on mount
+    handleResize();
+
+    // Add resize event listener
+    window.addEventListener("resize", handleResize);
+
+    // Cleanup the event listener on component unmount
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   return (
     <div className={`relative h-screen ${isCollapsed ? "" : "pl-48"}`}>
-      {/* Toggle Button */}
+      {/* Toggle Button with Burger Icon */}
       <button
         onClick={toggleSidebar}
-        className={`absolute top-3 ${
+        className={`absolute top-4 ${
           isCollapsed ? "left-4" : "left-52"
         } z-10 p-2 bg-gray-200 rounded-full shadow-lg focus:outline-none`}
         aria-label="Toggle sidebar"
       >
-        {isCollapsed ? "▶" : "◀"}
+        {/* Burger Icon */}
+        <div className="flex flex-col items-center space-y-1">
+          <span className="block w-6 h-0.5 bg-gray-800"></span>
+          <span className="block w-6 h-0.5 bg-gray-800"></span>
+          <span className="block w-6 h-0.5 bg-gray-800"></span>
+        </div>
       </button>
 
-      {/* Collapsable Sidebar */}
+      {/* Sidebar */}
       {!isCollapsed && (
         <div className="fixed top-0 left-0 h-screen w-48 border-r border-gray-200 bg-gray-50 flex flex-col transition-all duration-300">
           {/* Sidebar Header */}
