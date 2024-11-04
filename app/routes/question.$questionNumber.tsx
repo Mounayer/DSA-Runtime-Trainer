@@ -112,7 +112,9 @@ export default function Question() {
       }
       return;
     }
-    navigate(`/question/${Number(questionNumber) + 1}`);
+    navigate(
+      `/question/${Number(questionNumber) + 1}?difficulty=${difficulty}`
+    );
   };
 
   return (
