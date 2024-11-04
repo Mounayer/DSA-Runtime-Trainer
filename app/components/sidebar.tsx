@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Sidebar as FlowbiteSidebar } from "flowbite-react";
+import { Menu } from "lucide-react"; // Import the burger menu icon from Lucide
 import easyQuestions from "~/data/easy";
 import hardQuestions from "~/data/hard";
 import mediumQuestions from "~/data/medium";
@@ -31,7 +32,7 @@ export default function Sidebar() {
 
   return (
     <div className={`relative h-screen ${isCollapsed ? "" : "pl-48"}`}>
-      {/* Toggle Button with Burger Icon */}
+      {/* Toggle Button with Lucide Burger Icon */}
       <button
         onClick={toggleSidebar}
         className={`absolute top-4 ${
@@ -39,12 +40,7 @@ export default function Sidebar() {
         } z-10 p-2 bg-gray-200 rounded-full shadow-lg focus:outline-none`}
         aria-label="Toggle sidebar"
       >
-        {/* Burger Icon */}
-        <div className="flex flex-col items-center space-y-1">
-          <span className="block w-6 h-0.5 bg-gray-800"></span>
-          <span className="block w-6 h-0.5 bg-gray-800"></span>
-          <span className="block w-6 h-0.5 bg-gray-800"></span>
-        </div>
+        <Menu className="w-6 h-6 text-gray-800" /> {/* Lucide Menu icon */}
       </button>
 
       {/* Sidebar */}
