@@ -2,8 +2,11 @@ import type { MetaFunction } from "@remix-run/node";
 
 export const meta: MetaFunction = () => {
   return [
-    { title: "DSA Runtime Practice" },
-    { name: "description", content: "Practice your Runtime Knowledge!" },
+    { title: "DSA Runtime Trainer" },
+    {
+      name: "description",
+      content: "Practice Your Runtime Complexity Knowledge!",
+    },
   ];
 };
 

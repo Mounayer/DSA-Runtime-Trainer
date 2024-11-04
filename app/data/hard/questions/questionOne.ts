@@ -34,7 +34,7 @@ const code = new CodeBlock(
   )
   .add("}")
   .add("")
-  .add("// Analyze this")
+  .add("// Analyze this function")
   .add("int fib(int n)")
   .add("{")
   .add("std::unordered_map<int, int> memo;", "1", "1 for the declaration")

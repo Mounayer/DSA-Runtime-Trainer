@@ -10,8 +10,11 @@ import type { default as IQuestion } from "~/model/question";
 
 export const meta: MetaFunction = () => {
   return [
-    { title: "DSA Runtime Practice" },
-    { name: "description", content: "Practice your Runtime Knowledge!" },
+    { title: "DSA Runtime Trainer" },
+    {
+      name: "description",
+      content: "Practice Your Runtime Complexity Knowledge!",
+    },
   ];
 };
 
@@ -19,6 +22,7 @@ export default function Question() {
   const { questionNumber } = useParams();
   const [selectedComplexity, setSelectedComplexity] = useState("");
   const [submit, setSubmit] = useState(false);
+  const [highlightedCode, setHighlightedCode] = useState<string | null>(null); // null initially to handle loading state
   const navigate = useNavigate();
 
   const [searchParams] = useSearchParams();
@@ -56,20 +60,26 @@ export default function Question() {
   const code = question.code.line.join("\n");
   const formattedCode = formatCode(code);
 
-  const highlightedCode = formattedCode
-    .split("\n")
-    .map((line, index) => {
-      const result =
-        submit && question.code.result[index]
-          ? ` // ${question.code.result[index]}`
-          : "";
-      const explanation =
-        submit && question.code.explanation[index]
-          ? `, explanation: ${question.code.explanation[index]}`
-          : "";
-      return `${line}${result}${explanation}`;
-    })
-    .join("\n");
+  // Generate the highlighted code and update state when ready
+  // eslint-disable-next-line
+  useEffect(() => {
+    const processedCode = formattedCode
+      .split("\n")
+      .map((line, index) => {
+        const result =
+          submit && question.code.result[index]
+            ? ` // ${question.code.result[index]}`
+            : "";
+        const explanation =
+          submit && question.code.explanation[index]
+            ? `, explanation: ${question.code.explanation[index]}`
+            : "";
+        return `${line}${result}${explanation}`;
+      })
+      .join("\n");
+
+    setHighlightedCode(processedCode);
+  }, [formattedCode, submit, question]);
 
   const handleRadioChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSelectedComplexity(event.target.value);
@@ -99,16 +109,20 @@ export default function Question() {
         Question {question.id} - Difficulty: {question.difficulty}
       </h1>
       <div className="p-4 rounded-lg border-2 border-black code-container">
-        <SyntaxHighlighter
-          language={question.language}
-          customStyle={{
-            backgroundColor: "white",
-            overflowX: "hidden", // Ensures no horizontal scroll
-          }}
-          wrapLongLines
-        >
-          {highlightedCode}
-        </SyntaxHighlighter>
+        {highlightedCode ? (
+          <SyntaxHighlighter
+            language={question.language}
+            customStyle={{
+              backgroundColor: "white",
+              overflowX: "hidden",
+            }}
+            wrapLongLines
+          >
+            {highlightedCode}
+          </SyntaxHighlighter>
+        ) : (
+          <p>Loading code...</p>
+        )}
       </div>
 
       {submit && selectedComplexity.trim() === question.result && (

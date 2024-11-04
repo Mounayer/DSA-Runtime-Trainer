@@ -1,5 +1,5 @@
 {
-  "name": "runtime-complexity-trainer",
+  "name": "dsa-runtime-trainer",
   "version": "1.0.0",
   "description": "A web app to train your brain to calculate the runtime complexity of algorithms",
   "author": {
